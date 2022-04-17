@@ -85,23 +85,16 @@ function scoreGame() {
   let green = scoreCounts(tallyGreen());
   let columns = tallyByColumns() * 5;
   let numbers = tallyByNumbers() * 5;
-  return blue + red + yellow + green + columns + numbers;
-}
+  let sum = blue + red + yellow + green + columns + numbers;
 
-function render() {
-  document.getElementById().classList.remove
-  for (let box in all) {
-    if (box.state === "marked") {
-      box.element.disabled = false;
-      box.element.classList.add("marked");
-    } else if (box.state === "skipped") {
-      box.element.classList.remove("marked");
-      box.element.disabled = true;
-    } else {
-      box.element.classList.remove("marked");
-      box.element.disabled = false;
-    }
-  }
+  document.getElementById("blue-score").innerText = blue.toString();
+  document.getElementById("red-score").innerText = red.toString();
+  document.getElementById("yellow-score").innerText = yellow.toString();
+  document.getElementById("green-score").innerText = green.toString();
+  document.getElementById("farfig-score").innerText = "0";
+  document.getElementById("number-score").innerText = numbers.toString();
+  document.getElementById("column-score").innerText = columns.toString();
+  document.getElementById("total-score").innerText = sum.toString();
 }
 
 function init() {
@@ -159,6 +152,7 @@ function init() {
   blues.push(createBox("blue", "Lock", 11, "open"));
 
   all = reds.concat(blues.concat(greens.concat(yellows)));
+  scoreGame();
 }
 
 function createBox(color, value, order) {
@@ -186,7 +180,7 @@ function createBox(color, value, order) {
      el.classList.remove("marked");
    }
 
-   document.getElementById("score").innerText = scoreGame().toString();
+   scoreGame();
   });
 
   return obj;
